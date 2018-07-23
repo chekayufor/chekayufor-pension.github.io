@@ -25,27 +25,6 @@ pensionApp.controller('ContactController', ['$scope', '$location','$http', funct
             $location.path("/contact-success");
         };
 
-        
-// $http(...).
-// then(function onSuccess(response) {
-//   // Handle success
-//   var data = response.data;
-//   var status = response.status;
-//   var statusText = response.statusText;
-//   var headers = response.headers;
-//   var config = response.config;
-//   ...
-// }).
-// catch(function onError(response) {
-//   // Handle error
-//   var data = response.data;
-//   var status = response.status;
-//   var statusText = response.statusText;
-//   var headers = response.headers;
-//   var config = response.config;
-//   ...
-// });
-    
     // $scope.sendEmail = function(form){
     //     console.log(form);
     //    $location.path("/contact-success");
