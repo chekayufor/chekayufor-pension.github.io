@@ -1,28 +1,26 @@
-//const sgMail = require('@sendgrid/mail');
-//sgMail.setApiKey('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');
+settings.sendgrid = {
+    key:"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",
+    }
+const sg     = require('sendgrid')(settings.sendgrid.key);
+const helper        = require('sendgrid').mail;
+ SendEmail () {
+        this.fromEmail  = new helper.Email("Sender Email");
+        this.toEmail    = new helper.Email("Recipient Email");
+        this.subject    = "Subject";
+        this.content    = new helper.Content("text/html", "Email Message");
+ 
+        const mail = new helper.Mail(this.fromEmail, this.subject, this.toEmail, this.content);
 
-/*const sendEmail = (from, to, subject, text, html) => {
-    const msg = {
-      to: to,
-      from: from,
-      subject: 'Sending with SendGrid is Fun',
-      text: 'and easy to do anywhere, even with Node.js',
-      html: '<strong>and easy to do anywhere, even with Node.js</strong>',
-    };
-    sgMail.send(msg);
-}
 
-module.exports = sendEmail;*/
-var express = require('express');
+        return mail;
+ }
 
-var app = express();
-
-var PORT = 3000;
-
-app.get('/', function(req, res) {
-    res.status(200).send('Hello world');
+ const request = sg.emptyRequest({
+    method : 'POST',
+    path   : '/v3/mail/send',
+    body   : mail.toJSON(),
 });
 
-app.listen(PORT, function() {
-    console.log('Server is running on PORT:',PORT);
+sg.API(request, (error, response) => {
+    // response of request send to SendGrid API
 });

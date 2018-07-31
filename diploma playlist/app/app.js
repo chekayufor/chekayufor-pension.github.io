@@ -10,6 +10,7 @@ pensionApp.controller('ScrollingController', ['$scope','$location','$anchorScrol
 
 pensionApp.controller('ContactController', ['$scope', '$location','$http', function($scope, $location, $http) {
     
+    
       $scope.sendEmail = function() {
 
                 console.log("TEST");
