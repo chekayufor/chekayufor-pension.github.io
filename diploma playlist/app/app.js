@@ -2,51 +2,90 @@
 var pensionApp = angular.module('pensionApp', ['ngRoute', 'ngAnimate']);
 
 pensionApp.controller('ScrollingController', ['$scope','$location','$anchorScroll','$routeParams', function($scope, $location, $anchorScroll, $routeParams) {
-       
+
     $scope.scrollTo = function (id) {
-        $anchorScroll(id);  
+        $anchorScroll(id);
       }
   }]);
 
 pensionApp.controller('ContactController', ['$scope', '$location','$http', function($scope, $location, $http) {
-    
+
       $scope.sendEmail = function() {
 
-                console.log("TEST");
-            //Request
-            $http.post('/email', $scope.email) 
-            .then(function onSuccess(response) {
-                console.log("Sent ok");
-            })
-            .catch(function onError(responses) {
-                console.log("Error");
-            });
+        /*var req = {
+           method: 'POST',
+           url: 'https://api.sendgrid.com/v3/mail/send',
+           headers: {
+             'Authorization': 'Bearer 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',
+             'Content-Type': 'Content-Type: application/json',
+             'Access-Control-Allow-Origin': '*'
+           },
+           data: {
+             "personalizations": [
+               {
+                 "to": [{"email": "chekayufor@gmail.com"}]
+               }
+             ],
+             "from": {
+               "email": "example@example.com"
+             },
+             "subject": "Hello, World!",
+             "content": [
+               {
+                 "type": "text/plain",
+                 "value": "Heya!"
+               }
+             ]
+           }
+        };*/
 
-            $location.path("/contact-success");
+
+        var req = {
+          method: 'POST',
+          url: 'https://api.sendgrid.com/api/mail.send.json',
+          headers: {
+            'Authorization': 'Bearer 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',
+            'Content-Type': 'Content-Type: application/json',
+            'Access-Control-Allow-Origin': '*'
+          },
+          data: 'api_user=your_sendgrid_username&api_key=your_sendgrid_password&to=destination@example.com&toname=Destination&subject=Example_Subject&text=testingtextbody&from=info@domain.com'
         };
+
+          //Request
+          $http(req)
+          //$http.post('/email', $scope.email)
+          .then(function onSuccess(response) {
+              console.log("Sent ok");
+          })
+          .catch(function onError(responses) {
+              console.log("Error");
+          });
+
+          $location.path("/contact-success");
+      };
 
     // $scope.sendEmail = function(form){
     //     console.log(form);
     //    $location.path("/contact-success");
     // };
 
-   
-    
+
+
   }]);
 
-  
-  
+
+
   pensionApp.controller('CalculateController', ['$scope', function($scope) {
-    
+
     $scope.calculatePencion = function(){
-        
+
         $scope.result = $scope.calculate.Zz * $scope.calculate.Kz * $scope.calculate.Cm * $scope.calculate.Bc;
     }
   }]);
-  
+
 //routeProvider
   pensionApp.config(['$routeProvider', function($routeProvider){
-    
+
     $routeProvider
     .when('/home',{
         templateUrl: 'views/home.html'
@@ -74,7 +113,7 @@ pensionApp.controller('ContactController', ['$scope', '$location','$http', funct
         redirectTo: '/home'
     })
 
-   
+
 
 
 
