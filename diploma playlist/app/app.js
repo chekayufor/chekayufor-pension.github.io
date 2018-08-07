@@ -11,11 +11,25 @@ pensionApp.controller('ScrollingController', ['$scope','$location','$anchorScrol
 pensionApp.controller('ContactController', ['$scope', '$location','$http', function($scope, $location, $http) {
     
     
-      $scope.sendEmail = function() {
+     $scope.sendEmail = function() {
 
-                console.log("TEST");
+        // var req = {
+        //     method: 'POST',
+        //     url: 'https://api.sendgrid.com/api/mail.send.json',
+        //     headers: {
+        //       'Authorization': 'Bearer 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',
+        //       'Content-Type': 'Content-Type: application/json',
+        //       'Access-Control-Allow-Origin': '*'
+        //     },
+        //     data: 'api_user=your_sendgrid_username&api_key=your_sendgrid_password&to=destination@example.com&toname=Destination&subject=Example_Subject&text=testingtextbody&from=info@domain.com'
+        //   };
+            
+
+            
+            console.log("TEST", $scope.email);
+
             //Request
-            $http.post('/email', $scope.email) 
+            $http.post('http://localhost:3000/email', $scope.email) 
             .then(function onSuccess(response) {
                 console.log("Sent ok");
             })
@@ -25,32 +39,6 @@ pensionApp.controller('ContactController', ['$scope', '$location','$http', funct
 
             $location.path("/contact-success");
         };
-
-        
-// $http(...).
-// then(function onSuccess(response) {
-//   // Handle success
-//   var data = response.data;
-//   var status = response.status;
-//   var statusText = response.statusText;
-//   var headers = response.headers;
-//   var config = response.config;
-//   ...
-// }).
-// catch(function onError(response) {
-//   // Handle error
-//   var data = response.data;
-//   var status = response.status;
-//   var statusText = response.statusText;
-//   var headers = response.headers;
-//   var config = response.config;
-//   ...
-// });
-    
-    // $scope.sendEmail = function(form){
-    //     console.log(form);
-    //    $location.path("/contact-success");
-    // };
 
    
   }]);
